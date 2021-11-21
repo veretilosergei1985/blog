@@ -1,0 +1,28 @@
+App\Entity\Comment:
+  properties:
+    username:
+      - NotBlank: ~
+      - Length:
+          min: 3
+          max: 50
+    content:
+      - NotBlank: ~
+      - Length:
+          min: 10
+          max: 200
+    post:
+      - NotBlank: ~
+App\Entity\Post:
+  properties:
+    title:
+      - NotBlank: ~
+      - Length:
+          min: 5
+          max: 100
+    content:
+      - NotBlank: ~
+      - Length:
+          min: 10
+          max: 1000
+    user:
+      - NotBlank: ~

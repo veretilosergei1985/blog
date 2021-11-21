@@ -1,0 +1,9 @@
+:80 {
+    root * /srv/public
+
+    rewrite * /index.php?{query}
+
+    php_fastcgi * symfony-test-core:9000
+
+    log
+}

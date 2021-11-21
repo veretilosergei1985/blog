@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            {% if posts is defined  %}
+                {% for post in posts %}
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="{{ path('post_view', {'id': post.id}) }}">{{ post.title }}
+                            <h2 class="post-title">{{ post.content|u.truncate(70, '...', false) }}</h2>
+                        </a>
+                        <p class="post-meta">
+                            Posted on {% if "now"|date("d.m.y") == post.createdAt|date('d.m.y') %} Today {% else %} {{ post.createdAt|date('d.m.y') }} {% endif %}
+                        </p>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                {% endfor %}
+            {% else %}
+                <div>
+                    No posts found
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

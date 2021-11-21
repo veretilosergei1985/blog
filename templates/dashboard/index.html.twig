@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block header %}
+    <!-- Page Header-->
+    <header class="masthead">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>User Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    <div class="justify-content-center">
+        <div>
+            <div class="create-post">
+                <a class="btn btn-primary" href="{{ path('post_create') }}" role="button">Create new post</a>
+            </div>
+            {% if posts is defined  %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Updated At</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for post in posts %}
+                        <tr>
+                            <th scope="row">{{ post.id }}</th>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.createdAt|date('d.m.y') }}</td>
+                            <td>@{{ post.modifiedAt|date('d.m.y') }}</td>
+                            <td>
+                                <a href="{{ path('post_edit', {'id': post.id}) }}">edit</a> |
+                                <a href="{{ path('post_delete', {'id': post.id}) }}">delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <div>
+                    No posts found
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
